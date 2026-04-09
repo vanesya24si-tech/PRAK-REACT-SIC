@@ -50,7 +50,7 @@ export default function FrameworkListSerchFilter() {
           type="text"
           name="searchTerm"
           placeholder="Cari nama, deskripsi, atau developer..."
-          className="w-full p-3 border border-pink-200 rounded-xl focus:ring-2 focus:ring-pink-400 outline-none"
+          className="w-full p-3 border border-red-200 rounded-xl focus:ring-2 focus:ring-pink-400 outline-none"
           onChange={handleChange}
         />
 
