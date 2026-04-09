@@ -1,10 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-// import './index.css'
-import App from './App.jsx'
+
+// Ubah import ini agar mengarah ke folder pertemuan-4
+import FrameworkList from './pertemuan-4/FrameworkList.jsx'
 import "./tailwind.css";
+import ResponsiveText from './pertemuan-4/ResponsiveTextDesign.jsx';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ResponsiveText />
   </StrictMode>,
 )
