@@ -32,8 +32,8 @@ export default function Customers() {
             <tbody className="divide-y divide-gray-100">
               {customersData.map((c) => (
                 <tr key={c.customerId} className="hover:bg-pink-50/30 transition-colors">
-                  <td className="px-6 py-4 text-sm font-semibold text-gray-700">{c.customerId}</td>
-                  <td className="px-6 py-4 text-sm text-gray-800">{c.customerName}</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-gray-700">{c.id}</td>
+                  <td className="px-6 py-4 text-sm text-gray-800">{c.name}</td>
                   <td className="px-6 py-4 text-sm text-gray-500">{c.email}</td>
                   <td className="px-6 py-4 text-sm text-gray-500">{c.phone}</td>
                   <td className="px-6 py-4">
