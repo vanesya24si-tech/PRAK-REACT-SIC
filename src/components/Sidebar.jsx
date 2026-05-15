@@ -1,4 +1,4 @@
-import { FaThLarge, FaList, FaHeadphones } from "react-icons/fa";
+import { FaThLarge, FaList, FaHeadphones, FaShoppingCart } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
@@ -28,6 +28,9 @@ export default function Sidebar() {
           </NavLink>
           <NavLink to="/customers" className={navClass}>
             <FaHeadphones /> Customers
+          </NavLink>
+          <NavLink to="/products" className={navClass}>
+            <FaShoppingCart /> Products
           </NavLink>
           <NavLink to="/error/400" className={navClass}>
             Error 400

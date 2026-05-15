@@ -7,7 +7,10 @@ import Loading from "./components/Loading";
 /* Lazy Pages */
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const Customers = lazy(() => import("./pages/Customers"));
+const CustomerDetail = lazy(() => import("./pages/CustomerDetail"));
 const Orders = lazy(() => import("./pages/Orders"));
+const Products = lazy(() => import("./pages/Products"));
+const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
 /* Auth */
@@ -36,7 +39,10 @@ function App() {
           <Route path="/" element={<Dashboard />} />
 
           <Route path="/customers" element={<Customers />} />
+          <Route path="/customers/:id" element={<CustomerDetail />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
 
           <Route path="/400" element={<ErrorPage code="400" />} />
           <Route path="/401" element={<ErrorPage code="401" />} />

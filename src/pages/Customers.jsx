@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import { customersData } from "../utils/data"; // Pastikan path benar
 
@@ -23,7 +24,7 @@ export default function Customers() {
             <thead className="bg-gray-50 text-gray-400 text-sm uppercase">
               <tr>
                 <th className="px-6 py-4 font-medium">Customer ID</th>
-                <th className="px-6 py-4 font-medium">Name</th>
+                <th className="px-6 py-4 font-medium">Nama</th>
                 <th className="px-6 py-4 font-medium">Email</th>
                 <th className="px-6 py-4 font-medium">Phone</th>
                 <th className="px-6 py-4 font-medium">Loyalty</th>
@@ -31,9 +32,13 @@ export default function Customers() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {customersData.map((c) => (
-                <tr key={c.customerId} className="hover:bg-pink-50/30 transition-colors">
+                <tr key={c.id} className="hover:bg-pink-50/30 transition-colors">
                   <td className="px-6 py-4 text-sm font-semibold text-gray-700">{c.id}</td>
-                  <td className="px-6 py-4 text-sm text-gray-800">{c.name}</td>
+                  <td className="px-6 py-4 text-sm text-gray-800">
+                    <Link to={`/customers/${c.id}`} className="text-emerald-400 hover:text-emerald-500">
+                      {c.name}
+                    </Link>
+                  </td>
                   <td className="px-6 py-4 text-sm text-gray-500">{c.email}</td>
                   <td className="px-6 py-4 text-sm text-gray-500">{c.phone}</td>
                   <td className="px-6 py-4">
