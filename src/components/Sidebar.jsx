@@ -32,14 +32,9 @@ export default function Sidebar() {
           <NavLink to="/products" className={navClass}>
             <FaShoppingCart /> Products
           </NavLink>
-          <NavLink to="/error/400" className={navClass}>
-            Error 400
-          </NavLink>
-          <NavLink to="/error/401" className={navClass}>
-            Error 401
-          </NavLink>
-          <NavLink to="/error/403" className={navClass}>
-            Error 403
+
+          <NavLink to="/components" className={navClass}>
+            <FaThLarge /> Components
           </NavLink>
         </nav>
       </div>

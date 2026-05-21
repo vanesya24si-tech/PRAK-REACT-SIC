@@ -13,6 +13,9 @@ const Products = lazy(() => import("./pages/Products"));
 const ProductDetail = lazy(() => import("./pages/ProductDetail"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 
+// ─── 1. TAMBAHKAN LAZY IMPORT UNTUK PAGE COMPONENTS DI SINI ───
+const Components = lazy(() => import("./pages/Components")); 
+
 /* Auth */
 const Login = lazy(() => import("./pages/Auth/Login"));
 const Register = lazy(() => import("./pages/Auth/Register"));
@@ -43,6 +46,9 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
+
+          {/* ─── 2. DAFTARKAN ROUTE COMPONENTS DI SINI ─── */}
+          <Route path="/components" element={<Components />} /> 
 
           <Route path="/400" element={<ErrorPage code="400" />} />
           <Route path="/401" element={<ErrorPage code="401" />} />
