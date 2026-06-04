@@ -1,4 +1,4 @@
-import { FaThLarge, FaList, FaHeadphones, FaShoppingCart } from "react-icons/fa";
+import { FaThLarge, FaList, FaHeadphones, FaShoppingCart, FaRocket } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
@@ -31,6 +31,10 @@ export default function Sidebar() {
           </NavLink>
           <NavLink to="/products" className={navClass}>
             <FaShoppingCart /> Products
+          </NavLink>
+
+          <NavLink to="/fitur-xyz" className={navClass}>
+            <FaRocket /> Fitur Xyz
           </NavLink>
 
           <NavLink to="/components" className={navClass}>
