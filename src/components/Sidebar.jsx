@@ -1,7 +1,10 @@
 import { FaThLarge, FaList, FaHeadphones, FaShoppingCart } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Sidebar() {
+  const { profile } = useAuth();
+
   const navClass = ({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
       isActive
@@ -26,9 +29,11 @@ export default function Sidebar() {
           <NavLink to="/orders" className={navClass}>
             <FaList /> Orders
           </NavLink>
-          <NavLink to="/customers" className={navClass}>
-            <FaHeadphones /> Customers
-          </NavLink>
+          {profile?.role === "Admin" && (
+            <NavLink to="/customers" className={navClass}>
+              <FaHeadphones /> Customers
+            </NavLink>
+          )}
           <NavLink to="/products" className={navClass}>
             <FaShoppingCart /> Products
           </NavLink>

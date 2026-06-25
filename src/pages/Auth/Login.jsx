@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const [dataForm, setDataForm] = useState({
-    email: "emilys",
-    password: "emilyspass",
+    email: "",
+    password: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -29,30 +30,13 @@ export default function Login() {
     setError("");
 
     try {
-      const response = await axios.post(
-        "https://dummyjson.com/user/login",
-        {
-          username: dataForm.email,
-          password: dataForm.password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      localStorage.setItem(
-        "user",
-        JSON.stringify(response.data)
-      );
+      await signIn(dataForm.email, dataForm.password);
 
       navigate("/");
 
     } catch (err) {
       setError(
-        err.response?.data?.message ||
-        "Username atau password salah"
+        err.message || "Email atau password salah"
       );
     } finally {
       setLoading(false);
@@ -82,19 +66,19 @@ export default function Login() {
 
       <form onSubmit={handleSubmit}>
 
-        {/* Username */}
+        {/* Email */}
         <div className="mb-5">
           <label className="block text-sm font-medium text-gray-700 mb-1">
-            Username
+            Email
           </label>
 
           <input
-            type="text"
+            type="email"
             name="email"
             value={dataForm.email}
             onChange={handleChange}
             className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400"
-            placeholder="Enter username"
+            placeholder="you@example.com"
             required
           />
         </div>
@@ -125,6 +109,13 @@ export default function Login() {
         </button>
 
       </form>
+
+      <p className="text-center text-sm text-gray-500 mt-4">
+        Belum punya akun?{" "}
+        <Link to="/register" className="text-green-500 hover:underline">
+          Register
+        </Link>
+      </p>
 
     </div>
   );

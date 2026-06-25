@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 
 import "./assets/tailwind.css";
 import Loading from "./components/Loading";
@@ -25,24 +26,45 @@ const Forgot = lazy(() => import("./pages/Auth/Forgot"));
 const MainLayout = lazy(() => import("./layouts/MainLayout"));
 const AuthLayout = lazy(() => import("./layouts/AuthLayout"));
 
+/* ─── Protected Route Component ─── */
+function ProtectedRoute({ children, adminOnly = false }) {
+  const { session, profile, loading } = useAuth();
+
+  if (loading) return <Loading />;
+  if (!session) return <Navigate to="/login" replace />;
+  if (adminOnly && profile?.role !== "Admin") return <Navigate to="/" replace />;
+
+  return children;
+}
+
+/* ─── Guest Route (redirect jika sudah login) ─── */
+function GuestRoute({ children }) {
+  const { session, loading } = useAuth();
+
+  if (loading) return <Loading />;
+  if (session) return <Navigate to="/" replace />;
+
+  return children;
+}
+
 function App() {
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
 
         {/* Auth */}
-        <Route element={<AuthLayout />}>
+        <Route element={<GuestRoute><AuthLayout /></GuestRoute>}>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot" element={<Forgot />} />
         </Route>
 
         {/* Main */}
-        <Route element={<MainLayout />}>
+        <Route element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
           <Route path="/" element={<Dashboard />} />
 
-          <Route path="/customers" element={<Customers />} />
-          <Route path="/customers/:id" element={<CustomerDetail />} />
+          <Route path="/customers" element={<ProtectedRoute adminOnly><Customers /></ProtectedRoute>} />
+          <Route path="/customers/:id" element={<ProtectedRoute adminOnly><CustomerDetail /></ProtectedRoute>} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:id" element={<ProductDetail />} />
